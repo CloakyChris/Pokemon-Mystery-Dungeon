@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Mystery Dungeon Player</title>
+    <style>
+        body { background: #12121c; color: #e2e2e9; font-family: sans-serif; text-align: center; margin: 0; padding: 20px; }
+        h1 { color: #ffcb05; text-shadow: 2px 2px #3c5aa6; font-size: 24px; margin-bottom: 5px; }
+        h3 { color: #87aade; margin-top: 0; font-weight: normal; font-size: 14px; }
+        #canvas { background: #000; width: 480px; height: 320px; max-width: 100%; border: 4px solid #3c5aa6; border-radius: 8px; margin: 20px auto; display: block; }
+        .controls { background: #1c1c2a; max-width: 480px; margin: 20px auto; padding: 15px; border-radius: 8px; text-align: left; font-size: 14px; border: 1px solid #333; }
+        h2 { font-size: 16px; color: #ffcb05; margin-top: 0; }
+        ul { padding-left: 20px; color: #bbb; margin-bottom: 0; }
+        li { margin-bottom: 5px; }
+    </style>
+    <!-- Loads the open-source JavaScript GBA engine core -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+
+    <h1>Red Rescue Team</h1>
+    <h3>GBA Web Emulator Portal</h3>
+    
+    <canvas id="canvas"></canvas>
+
+    <div class="controls">
+        <h2>Keyboard Controls (for PC/School Computers)</h2>
+        <ul>
+            <li><strong>D-Pad (Movement):</strong> Up / Down / Left / Right Arrow Keys</li>
+            <li><strong>A Button (Confirm / Attack):</strong> Z Key</li>
+            <li><strong>B Button (Cancel / Run):</strong> X Key</li>
+            <li><strong>L / R Shoulder Buttons:</strong> A / S Keys</li>
+            <li><strong>Select / Start Buttons:</strong> Shift / Enter Keys</li>
+        </ul>
+    </div>
+
+    <script>
+        window.onload = function() {
+            try {
+                // Initialize the emulator framework on the canvas
+                var gba = new GameBoyAdvance();
+                gba.setCanvas(document.getElementById("canvas"));
+                gba.logLevel = gba.LOG_ERROR;
+
+                // Automatically load your game file relative to this directory
+                gba.loadRomFromFile("game.gba", function(result) {
+                    if (result) {
+                        gba.run();
+                    } else {
+                        console.error("Failed to load game.gba automatically.");
+                    }
+                });
+            } catch(e) {
+                alert("Emulator failed to initialize: " + e.message);
+            }
+        };
+    </script>
+</body>
+</html>
