@@ -43,12 +43,12 @@
                 gba.setCanvas(document.getElementById("canvas"));
                 gba.logLevel = gba.LOG_ERROR;
 
-                // Automatically load your game file relative to this directory
-                gba.loadRomFromFile("game.gba", function(result) {
+                // Automatically load your zip file relative to this directory
+                gba.loadRomFromFile("game.zip", function(result) {
                     if (result) {
                         gba.run();
                     } else {
-                        console.error("Failed to load game.gba automatically.");
+                        console.error("Failed to load game.zip automatically.");
                     }
                 });
             } catch(e) {
